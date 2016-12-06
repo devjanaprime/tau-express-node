@@ -1,6 +1,31 @@
 var express = require('express');
 var path = require('path'); //no npm install
+var bodyParser = require('body-parser');
+
 var app = express();
+
+//middleware
+app.use(bodyParser.json());
+
+var testPet = {
+  name: 'daunte',
+  type: 'dog',
+  age: 7
+};
+var petData = [testPet];
+
+//send pets data back
+app.get('/pets', function(req, res) {
+  res.send(petData);
+});
+
+app.post('/pets', function(req, res) {
+  console.log('in post route');
+  console.log(req.body);
+  var newPet = req.body;
+  petData.push(newPet);
+  res.send('OK');
+});
 
 // base route
 app.get('/', function(req, res) {
