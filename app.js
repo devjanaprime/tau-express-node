@@ -7,6 +7,8 @@ var app = express();
 //middleware
 app.use(bodyParser.json());
 
+app.use(express.static('public'));
+
 var testPet = {
   name: 'daunte',
   type: 'dog',
@@ -23,6 +25,7 @@ app.post('/pets', function(req, res) {
   console.log('in post route');
   console.log(req.body);
   var newPet = req.body;
+  // console.log(newPet.name);
   petData.push(newPet);
   res.send('OK');
 });
